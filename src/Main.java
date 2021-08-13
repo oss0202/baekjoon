@@ -5,12 +5,9 @@ public class Main {
         Scanner in = new Scanner(System.in);
 
         int A = in.nextInt();
-        int B = in.nextInt();
-
         in.close();
 
-        String str = (A>B) ? ">" : ((A<B) ? "<" : "==" );
-        System.out.println(str);
+        System.out.print((A>=90)?"A": (A>=80)? "B": (A>=70)? "C": (A>=60)? "D": "F");
 
     }
 
