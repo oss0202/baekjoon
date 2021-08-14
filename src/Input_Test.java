@@ -6,11 +6,9 @@ public class Input_Test {
 
         InputStream inputStream =System.in;
 
-        byte[] bytes = new byte[10];
-        inputStream.read(bytes);
+        int IntByte = inputStream.read();
 
-        for (byte aByte : bytes) {
-            System.out.println(aByte);
-        }
+        System.out.println((char)IntByte);
+        System.out.println(IntByte);
     }
 }
