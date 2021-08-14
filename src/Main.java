@@ -1,14 +1,26 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 public class Main {
 
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int A = in.nextInt();
-        in.close();
+        int A = Integer.parseInt(br.readLine());
 
-        System.out.print((A>=90)?"A": (A>=80)? "B": (A>=70)? "C": (A>=60)? "D": "F");
+        int resultInt = 0;
+
+        if(A%4==0){
+            if(A%100!=0 || A%400 ==0){
+                resultInt =  1;
+            }else{
+                resultInt = 0;
+            }
+        }else{
+            resultInt =  0;
+        }
+
+        System.out.print(resultInt);
 
     }
-
 }
