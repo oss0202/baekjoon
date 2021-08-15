@@ -8,15 +8,9 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        String str = br.readLine();
-        String[] strings = str.split(" ");
-
-        int hour = Integer.parseInt(strings[0]);
-        int minute = Integer.parseInt(strings[1]);
-
-        LocalTime localTime = LocalTime.of(hour,minute);
-        localTime = localTime.minusMinutes(45);
-
-        System.out.println(localTime.getHour() + " " + localTime.getMinute());
+        int dan = Integer.parseInt(br.readLine());
+        for (int i = 1 ; i < 10; i++){
+            System.out.println( dan + " * " + i + " = " + dan * i);
+        }
     }
 }
