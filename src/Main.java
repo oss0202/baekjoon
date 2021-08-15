@@ -6,18 +6,17 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int A = Integer.parseInt(br.readLine());
+        int X = Integer.parseInt(br.readLine());
+        int Y = Integer.parseInt(br.readLine());
 
-        int resultInt = 0;
+        int resultInt;
 
-        if(A%4==0){
-            if(A%100!=0 || A%400 ==0){
-                resultInt =  1;
-            }else{
-                resultInt = 0;
-            }
+        if(X > 0){
+            if(Y > 0) resultInt  = 1;
+            else resultInt  = 4;
         }else{
-            resultInt =  0;
+            if(Y > 0) resultInt  = 2;
+            else resultInt  = 3;
         }
 
         System.out.print(resultInt);
