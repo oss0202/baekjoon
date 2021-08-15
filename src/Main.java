@@ -1,25 +1,22 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalTime;
+
 public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int X = Integer.parseInt(br.readLine());
-        int Y = Integer.parseInt(br.readLine());
+        String str = br.readLine();
+        String[] strings = str.split(" ");
 
-        int resultInt;
+        int hour = Integer.parseInt(strings[0]);
+        int minute = Integer.parseInt(strings[1]);
 
-        if(X > 0){
-            if(Y > 0) resultInt  = 1;
-            else resultInt  = 4;
-        }else{
-            if(Y > 0) resultInt  = 2;
-            else resultInt  = 3;
-        }
+        LocalTime localTime = LocalTime.of(hour,minute);
+        localTime = localTime.minusMinutes(45);
 
-        System.out.print(resultInt);
-
+        System.out.println(localTime.getHour() + " " + localTime.getMinute());
     }
 }
