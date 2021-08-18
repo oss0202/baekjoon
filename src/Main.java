@@ -1,8 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.stream.IntStream;
 
 public class Main {
 
@@ -10,20 +8,11 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         int runCnt = Integer.parseInt(br.readLine());
-        int a;
-        int b;
-        int[] resultInts = new int[runCnt];
-        String[] strings;
-        String str;
-        for (int i = 0 ; i < resultInts.length; i++){
-            str = br.readLine();
-            strings = str.split(" ");
-            a = Integer.parseInt(strings[0]);
-            b = Integer.parseInt(strings[1]);
-            resultInts[i] = a + b;
-        }
+        int result = 0;
 
-        IntStream intStream = Arrays.stream(resultInts);
-        intStream.forEach(System.out::println);
+        for (int i = 1 ; i <= runCnt; i++){
+            result+=i;
+        }
+        System.out.println(result);
     }
 }
