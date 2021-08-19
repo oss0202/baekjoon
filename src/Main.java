@@ -6,13 +6,22 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
 
         int runCnt = Integer.parseInt(br.readLine());
-        int result = 0;
-
-        for (int i = 1 ; i <= runCnt; i++){
-            result+=i;
+        int a;
+        int b;
+        int[] resultInts = new int[runCnt];
+        String[] strings;
+        String str;
+        for (int i = 0 ; i < resultInts.length; i++){
+            str = br.readLine();
+            strings = str.split(" ");
+            a = Integer.parseInt(strings[0]);
+            b = Integer.parseInt(strings[1]);
+            sb.append(a+b+"\n");
         }
-        System.out.println(result);
+        br.close();
+        System.out.println(sb);
     }
 }
