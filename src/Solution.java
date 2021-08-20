@@ -7,7 +7,7 @@ public class Solution {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         int rowNum = Integer.parseInt(br.readLine());
-        for (int i = 1 ; i <= rowNum; i++){
+        for (int i = rowNum ; i > 0; i--){
             System.out.println(i);
         }
         br.close();
