@@ -1,27 +1,20 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
 
-        int runCnt = Integer.parseInt(br.readLine());
-        int a;
-        int b;
-        int[] resultInts = new int[runCnt];
-        String[] strings;
-        String str;
-        for (int i = 0 ; i < resultInts.length; i++){
-            str = br.readLine();
-            strings = str.split(" ");
-            a = Integer.parseInt(strings[0]);
-            b = Integer.parseInt(strings[1]);
-            sb.append(a+b+"\n");
-        }
+        String[] firstInput = br.readLine().split(" ");
+        int N = Integer.parseInt(firstInput[0]);
+        int X = Integer.parseInt(firstInput[1]);
+
+        String[] secondInput = br.readLine().split(" ");
+        Arrays.stream(secondInput).filter(s -> Integer.parseInt(s)< X ).forEach(s -> System.out.print(s + " "));
+
         br.close();
-        System.out.println(sb);
     }
 }
