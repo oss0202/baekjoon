@@ -5,38 +5,43 @@ import java.util.Arrays;
 public class Main2 {
     public static void main(String[] args) {
         Main2 main2 = new Main2();
-        int[] ints = main2.solution(7);
+//        long[] ints = main2.solution((long)Math.pow(10,5));
+        long[] ints = main2.solution(1);
         Arrays.stream(ints).forEach(System.out::println);
     }
 
-    public int[] solution(int n){
-        int[] answer = new int[2];
+    public long[] solution(long n){
+        long beforeTime = System.nanoTime(); //코드 실행 전에 시간 받아오기
+        long[] answer = new long[2];
         //나머지 최소, 최대 변수
-        int reMax = 0;
-        int reMin = 0;
+        long reMax = 0;
+        long reMin = 0;
 
-        int quotient = n/7;
-        int remainder = n%7;
+        long quotient = n/7;
+        long remainder = n%7;
 
         //주 계산
-        int weekCnt = quotient*2;
+        long weekCnt = quotient*2;
 
         //나머지
         if(remainder != 0) {
             if (remainder == 1) {
                 reMax = 1;
-                reMin = 1;
             } else {
-                if (remainder < 7) {
-                    reMin = 1;
-                } else {
-                    reMin = 2;
-                }
                 reMax = 2;
+            }
+            if(remainder <= 5){
+                reMin = 1;
+            }else{
+                reMin = 1;
             }
         }
         answer[0] = (weekCnt + reMin);
         answer[1] = (weekCnt + reMax);
+        long afterTime = System.nanoTime(); // 코드 실행 후에 시간 받아오기
+        long secDiffTime = (afterTime - beforeTime); //두 시간에 차 계산
+
+        System.out.println("걸린 시간 : " + secDiffTime);
         return answer;
     }
 }
