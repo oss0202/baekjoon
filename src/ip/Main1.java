@@ -60,5 +60,27 @@ public class Main1 {
         return secDiffTime;
     }
 
+    public long solution3(int[] grade) {
+        long beforeTime = System.nanoTime(); //코드 실행 전에 시간 받아오기
+        int[] answer = new int[grade.length];
+        for (int i = 0; i < grade.length; i++) {
+            int rank = 1;
+//            answer[i] = 1;
+            for (int j = 0; j < grade.length; j++) {
+                if (grade[i] < grade[j]) {
+//                    answer[i]++;
+                    rank++;
+                }
+            }
+            answer[i] = rank;
+        }
+
+        long afterTime = System.nanoTime(); // 코드 실행 후에 시간 받아오기
+        long secDiffTime = (afterTime - beforeTime); //두 시간에 차 계산
+
+//        return answer;
+        return secDiffTime;
+    }
+
 
 }
