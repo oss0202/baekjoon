@@ -3,24 +3,21 @@ package baekjoon;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int N = Integer.parseInt(br.readLine());
-        StringTokenizer st = new StringTokenizer(br.readLine()," ");
-
-        int index = 0;
-        int[] arr = new int[N];
-        while(st.hasMoreTokens()) {
-            arr[index] = Integer.parseInt(st.nextToken());
-            index++;
+        int maxNum = 0;
+        int indexNum = 0;
+        for (int i = 0; i < 9; i++) {
+            int val = Integer.parseInt(br.readLine());
+            if(maxNum < val){
+                maxNum = val;
+                indexNum = i+ 1;
+            }
         }
-
-        Arrays.sort(arr);
-        System.out.print(arr[0] + " " + arr[N - 1]);
+        System.out.println(maxNum);
+        System.out.println(indexNum);
     }
 }
