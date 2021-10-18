@@ -1,23 +1,24 @@
 package baekjoon;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        Scanner in = new Scanner(System.in);
 
-        int maxNum = 0;
-        int indexNum = 0;
-        for (int i = 0; i < 9; i++) {
-            int val = Integer.parseInt(br.readLine());
-            if(maxNum < val){
-                maxNum = val;
-                indexNum = i+ 1;
-            }
+        double[] arrNum = new double[in.nextInt()];
+        for (int i = 0; i < arrNum.length; i++) {
+            arrNum[i]  = in.nextDouble();
         }
-        System.out.println(maxNum);
-        System.out.println(indexNum);
+        in.close();
+
+        double sum = 0;
+        Arrays.sort(arrNum);
+        for (int i = 0; i < arrNum.length; i++) {
+            sum += ((arrNum[i] / arrNum[arrNum.length-1])* 100 );
+        }
+        System.out.println(sum/ arrNum.length);
     }
 }
