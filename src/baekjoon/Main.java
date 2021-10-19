@@ -1,24 +1,32 @@
 package baekjoon;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.io.InputStreamReader;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Scanner in = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int caseNum = Integer.parseInt(br.readLine());
+        int[] scores = new int[caseNum];
 
-        double[] arrNum = new double[in.nextInt()];
-        for (int i = 0; i < arrNum.length; i++) {
-            arrNum[i]  = in.nextDouble();
+        for (int i = 0; i < caseNum; i++) {
+            int collectScore = 0;
+            int collectSum = 0;
+            char[] inputAns = br.readLine().toCharArray();
+            for (char inputAn : inputAns) {
+                if(inputAn == 'O') {
+                    collectScore++;
+                    collectSum += collectScore;
+                }else{
+                    collectScore = 0;
+                }
+            }
+            scores[i] = collectSum;
         }
-        in.close();
 
-        double sum = 0;
-        Arrays.sort(arrNum);
-        for (int i = 0; i < arrNum.length; i++) {
-            sum += ((arrNum[i] / arrNum[arrNum.length-1])* 100 );
+        for (int score : scores) {
+            System.out.println(score);
         }
-        System.out.println(sum/ arrNum.length);
     }
 }
