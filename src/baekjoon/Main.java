@@ -3,46 +3,52 @@ package baekjoon;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int caseNum = Integer.parseInt(br.readLine());
 
-        for (int i = 0; i < caseNum; i++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            // 학생 수
-            int stuNum = Integer.parseInt(st.nextToken());
-            // 그룹별 평균점수
-            int stuAvgArr = 0;
-            // 학생 점수 배열
-            double [] stuScoArr = new double[stuNum];
-            // 학생들 점수 합
-            int stuSum = 0;
-            // 학생 점수
-            double  stuSco = 0;
-            // 평균보다 높은 학생 수
-            double goodStu = 0;
+        //숫자 입력
+        int num = Integer.parseInt(br.readLine());
 
-            int k = 0;
-            // 학생들 점수 합구하기
-            while (st.hasMoreTokens()){
-                stuSco = Integer.parseInt(st.nextToken());
-                stuSum += stuSco;
-                stuScoArr[k] = stuSco;
-                k++;
-            }
-            // 학생들 평균 구하기
-            stuAvgArr = stuSum/stuNum;
+        // 한수함수 호출
+        int result = arithmetic_sequence(num);
+        System.out.println("result = " + result);
 
-            // 평균보다 큰 학생 수 구하기
-            for (double score : stuScoArr) {
-                if(stuAvgArr<score){
-                    goodStu++;
-                }
-            }
-            System.out.printf("%.3f%%\n",goodStu/stuNum*100);
-        }
+
    }
+    // 한수 : 등차수열을 이루는 수
+    // 등차수열 공식 an = a1 + (n-1)d
+    public static int arithmetic_sequence(int num){
+        int cnt = 0;	// 한수 카운팅 변수
+
+        if(num < 100){// 100보다 작을 경우 무조건 수열을 이룬다.
+            return num;
+
+        }else{// 100보다 클 경우
+            cnt = 99;// 100보다 작을 경우 default 카운트
+            if(num == 1000){ // 1000일 경우 999로 예외처리
+                num = 999;
+            }
+
+            // 백, 십, 일의 자리 숫자 구하여 등차수열 비교
+            for (int i = 100; i <= num; i++) {
+                int hun = (i / 100) % 10;
+                int ten = (i / 10) % 10;
+                int one = i % 10;
+                
+                //백의자리 - 십의자리
+                int firstDiff = hun - ten;
+                //십의자리 - 일의자리
+                int secondDiff = ten - one;
+
+                // 각 자릿수의 차이가 같으면 등차수열을 이룬다.
+                // 카운트
+               if(firstDiff == secondDiff){
+                   cnt++;
+               }
+            }
+        }
+        return cnt;
+    }
 }
