@@ -7,12 +7,23 @@ import java.io.InputStreamReader;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int inputNum = Integer.parseInt(br.readLine());
-        String[] inputArr = br.readLine().split("");
-        int sum = 0;
-        for (String s : inputArr) {
-            sum += Integer.parseInt(s);
+        String str = br.readLine();
+//        String str = "baekjoon";
+
+        // 배열 -1로 초기화
+        int[] arr = new int[26];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = -1;
         }
-        System.out.println(sum);
+
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            if(arr[ch - 'a'] == -1){
+                arr[ch - 'a'] = i;
+            }
+        }
+        for (int i : arr) {
+            System.out.print(i + " ");
+        }
    }
 }
