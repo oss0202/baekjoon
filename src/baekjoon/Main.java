@@ -7,6 +7,12 @@ import java.io.InputStreamReader;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println((int)br.readLine().charAt(0));
+        int inputNum = Integer.parseInt(br.readLine());
+        String[] inputArr = br.readLine().split("");
+        int sum = 0;
+        for (String s : inputArr) {
+            sum += Integer.parseInt(s);
+        }
+        System.out.println(sum);
    }
 }
