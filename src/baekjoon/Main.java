@@ -3,27 +3,27 @@ package baekjoon;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String str = br.readLine();
-//        String str = "baekjoon";
 
-        // 배열 -1로 초기화
-        int[] arr = new int[26];
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = -1;
-        }
+        int cnt = Integer.parseInt(br.readLine());
 
-        for (int i = 0; i < str.length(); i++) {
-            char ch = str.charAt(i);
-            if(arr[ch - 'a'] == -1){
-                arr[ch - 'a'] = i;
+        for (int i = 0; i < cnt; i++) {
+
+            StringTokenizer st = new StringTokenizer(br.readLine());
+
+            int copyCnt = Integer.parseInt(st.nextToken());
+            char[] chars = st.nextToken().toCharArray();
+
+            for (char aChar : chars) {
+                for (int j = 0; j < copyCnt; j++) {
+                    System.out.print(aChar);
+                }
             }
-        }
-        for (int i : arr) {
-            System.out.print(i + " ");
+            System.out.println();
         }
    }
 }
