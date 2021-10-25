@@ -13,17 +13,12 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        int[] ints = new int[10001];
-        ints[0] = 1;
-        ints[1] = 1;
-
-        System.out.println(ints.length);
-
-        List test = new ArrayList();
-        test.add("11");
-        System.out.println(test.size());
-
-        String str = "가나다";
-        System.out.println(str.length());
+        int[] arr = new int[2];
+        for (int i = 0; i < 10; i++) {
+            arr[0] += arr[0] + 1;
+            arr[1]++;
+        }
+        System.out.println(arr[0]);
+        System.out.println(arr[1]);
     }
 }
