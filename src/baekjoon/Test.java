@@ -13,12 +13,19 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        int[] arr = new int[2];
-        for (int i = 0; i < 10; i++) {
-            arr[0] += arr[0] + 1;
-            arr[1]++;
+        char a = 'a';
+        char b = 'b';
+        String str = "aaabbbcdefg";
+        char[] chars = str.toCharArray();
+        boolean resultbool = true;
+        for (int i = 0; i < chars.length-1; i++) {
+            if(chars[i] > chars[i+1]){
+                   resultbool = false;
+            }
         }
-        System.out.println(arr[0]);
-        System.out.println(arr[1]);
+        System.out.println(resultbool);
+        // 숫자로 바꾼 후에 숫자가 이전 숫자보다 같거나 크지 않으면 그룹단어가 아니다.
+//        System.out.println((int) a);
+//        System.out.println((int) b);
     }
 }
