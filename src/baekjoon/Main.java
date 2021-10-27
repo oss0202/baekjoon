@@ -3,45 +3,34 @@ package baekjoon;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Main {
-    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    public static boolean check() throws IOException {
-        boolean[] check = new boolean[26];
-        int prev = 0;
-//        String str = "aabbccdd";//intput();
-        String str = br.readLine();
-        for (int i = 0; i < str.length(); i++) {
-            // 현재 문자열 index값 저장
-            int now = str.charAt(i);
-            // 1.prev와 같다면 중복체크 X
-            if(prev == now){
-                continue;
-            }
-            // 2.prev와 다르다면 중복체크 O
-            else{
-                int charIndex = now - 97;
-                if(check[charIndex] == false){
-                    check[charIndex] = true;
-                    prev = now;
-                }else{
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
     public static void main(String[] args) throws IOException {
-        int cnt = Integer.parseInt(br.readLine());
+        /*
+        A : 고정비용
+        B : 가변비용
 
-        int count = 0;
+        ex. A : 1,000
+            B : 70
+            1대 생산 1070 : 1000 + 70
+            10대 생산 1700 : 1000 + 700
+            C : 가격
+         */
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        for (int i = 0; i < cnt; i++) {
-            if(check()==true){
-                count++;
-            }
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        int A = Integer.parseInt(st.nextToken());
+        int B = Integer.parseInt(st.nextToken());
+        int C = Integer.parseInt(st.nextToken());
+
+        int BEP = -1;
+        if(C-B > 0){//손익분기점이 없는 경우 제외
+            BEP = A/(C-B) + 1;
         }
-        System.out.println(count);
+        
+        // 손익 분기점이 존재않는 경우
+        System.out.println(BEP);
    }
 }
