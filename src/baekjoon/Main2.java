@@ -3,17 +3,9 @@ package baekjoon;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Scanner;
 
 public class Main2 {
     public static void main(String[] args) throws IOException {
-        /*
-        입력받을 X값
-        해당 범위의 대각선 개수 ( cross_count )
-        해당 대각선 직전 대각선 까지의 칸의 누적 합 ( prev_count_sum )
-         */
-//        Scanner in = new Scanner(System.in);
-//        int X = in.nextInt();
         /*
         In : Input 값
         nowCrossCnt : 현재 분수들 갯수
@@ -32,7 +24,8 @@ public class Main2 {
         2. 대각선 짝수
         반대로
          */
-        int X = 3;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int X = Integer.parseInt(br.readLine());
 
         int cross_count = 1, prev_count_sum = 0;
 
