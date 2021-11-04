@@ -1,34 +1,45 @@
 package programmers;
 
-import jdk.internal.org.objectweb.asm.tree.InnerClassNode;
-
-import java.util.Arrays;
+import java.util.*;
 
 public class Solution {
     public static void main(String[] args) {
-        int[] absolutes = {1,2,3};
-        boolean[] signs = {false,false,true};
+        String[] participant = {"leo", "kiki", "eden"};
+        String[] completion = {"eden", "kiki"};
 
-        int result = 0;
-        for (int i = 0; i < absolutes.length; i++) {
-             if(signs[i]){
-                 result += absolutes[i];
-             }else{
-                 result -= absolutes[i];
-             }
+//        String[] participant = {"mislav", "stanko", "mislav", "ana"};
+//        String[] completion = {"stanko", "ana", "mislav"};
+
+        String answer = "";
+        HashMap<String, Integer> map = new HashMap<>();
+        for (String player : participant) {
+            map.put(player, map.getOrDefault(player, 0) + 1);
         }
-        System.out.println(result);
+        for (String player : completion) {
+            map.put(player, map.get(player) - 1);
+        }
+
+        Iterator<Map.Entry<String, Integer>> iterator = map.entrySet().iterator();
+        while (iterator.hasNext()){
+            Map.Entry<String, Integer> entry = iterator.next();
+            System.out.println(entry);
+            System.out.println("Key - " + entry.getKey() + ", value - " + entry.getValue());
+        }
+
+
+//        System.out.println(result);
+//        System.out.println(solution(participant, completion));
     }
 
-    public static int solution(int[] absolutes, boolean[] signs) {
-        int result = 0;
-        for (int i = 0; i < absolutes.length; i++) {
-            if(signs[i]){
-                result += absolutes[i];
-            }else{
-                result -= absolutes[i];
+    public static String solution(String[] participant, String[] completion) {
+        Arrays.sort(participant);
+        Arrays.sort(completion);
+        int i;
+        for (i = 0; i < completion.length; i++) {
+            if(!participant[i].equals(completion[i])){
+                break;
             }
         }
-        return result;
+        return participant[i];
     }
 }
