@@ -1,20 +1,27 @@
 package programmers;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Test {
     public static void main(String[] args) {
-        int[] a = new int[2];
-        System.out.println(a.length);
+        Map<String, Integer> map = new HashMap<>();
+        map.put("첫번째", 1);
+        map.put("두번째", 2);
+        map.put("세번째", 3);
+        map.put("네번째", 4);
+        map.put("다섯번째", 5);
+        map.put("다섯번째", 5);
 
-        List list = new ArrayList();
-        list.add(11);
-        list.add(11);
-        list.add(11);
-        System.out.println(list.size());
+        Set<Map.Entry<String, Integer>> strings = map.entrySet();
+        strings.stream().forEach(stringIntegerEntry -> {
+            System.out.println(stringIntegerEntry.getKey());
+            System.out.println(stringIntegerEntry.getValue());
+        });
 
-        String str = "abcde";
-        System.out.println(str.length());
+        Iterator<Map.Entry<String, Integer>> iterator = map.entrySet().iterator();
+        while (iterator.hasNext()){
+            Map.Entry<String, Integer> key = iterator.next();
+            System.out.println(key);
+        }
     }
 }
