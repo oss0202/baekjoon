@@ -6,16 +6,29 @@ import java.util.Arrays;
 
 public class Solution {
     public static void main(String[] args) {
-        int[] numbers = {1,2,3,4,6,7,8,0};
-//        int[] numbers = {5,8,4,0,6,7,9};
-        Solution solution = new Solution();
-        int result = solution.solution(numbers);
+        int[] absolutes = {1,2,3};
+        boolean[] signs = {false,false,true};
+
+        int result = 0;
+        for (int i = 0; i < absolutes.length; i++) {
+             if(signs[i]){
+                 result += absolutes[i];
+             }else{
+                 result -= absolutes[i];
+             }
+        }
         System.out.println(result);
     }
 
-    public int solution(int[] numbers) {
-        int sum = 9*(1+9)/2;
-        int result = Arrays.stream(numbers).sum();
-        return sum - result;
+    public static int solution(int[] absolutes, boolean[] signs) {
+        int result = 0;
+        for (int i = 0; i < absolutes.length; i++) {
+            if(signs[i]){
+                result += absolutes[i];
+            }else{
+                result -= absolutes[i];
+            }
+        }
+        return result;
     }
 }
