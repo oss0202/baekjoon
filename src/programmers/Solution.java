@@ -1,68 +1,47 @@
 package programmers;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Solution {
     public static void main(String[] args) {
-        String str = "...!@BaT#*..y.abcdefghijklm";
-//        String str = "abcdefghijklmn.p";
-        str = str.toLowerCase();
+        int[][] board = {{0,0,0,0,0},{0,0,1,0,3},{0,2,5,0,1},{4,2,4,4,2},{3,5,1,3,1}};
+        int[] moves = {1,5,3,5,1,2,1,4};
 
-        str = str.replaceAll("[^a-z0-9-_.]","");
-
-        str = str.replaceAll("[.]{2,}",".");
-
-        str = str.replaceAll("^[.]|[.]$","");
-
-        if(str.equals("")){
-            str += "a";
-        }
-
-        if(str.length() >= 16){
-            str = str.substring(0, 15);
-            str = str.replaceAll("^[.]|[.]$","");
-        }
-
-        if(str.length() <= 2){
-            while (str.length() < 3){
-                str += str.charAt(str.length()-1);
-            }
-        }
-
-        System.out.println(str);
+        int result = solution(board, moves);
+        System.out.println(result);
     }
+    public static int solution(int[][] board, int[] moves) {
+        List<Integer> integers = new ArrayList<>();
 
-    public String solution(String new_id) {
-        //1단계 new_id의 모든 대문자를 대응되는 소문자로 치환합니다.
-        new_id = new_id.toLowerCase();
+        int cnt = 0;
+        int nowNum;
+        // 크레인 위치 반복
+        for (int i = 0; i < moves.length; i++) {
+            nowNum = 0;
+            int move = moves[i];
+            move--;//인덱스 이므로 -1
+            // 인형뽑기에서 뽑기
+            for (int j = 0; j < board.length; j++) {
+                nowNum = board[j][move];
 
-        //2단계 new_id에서 알파벳 소문자, 숫자, 빼기(-), 밑줄(_), 마침표(.)를 제외한 모든 문자를 제거합니다.
-        new_id = new_id.replaceAll("[^a-z0-9-_.]","");
-
-        //3단계 new_id에서 마침표(.)가 2번 이상 연속된 부분을 하나의 마침표(.)로 치환합니다.
-        new_id = new_id.replaceAll("[.]{2,}","");
-
-        //4단계 new_id에서 마침표(.)가 처음이나 끝에 위치한다면 제거합니다.
-        new_id = new_id.replaceAll("^[.]|[.]$","");
-
-        //5단계 new_id가 빈 문자열이라면, new_id에 "a"를 대입합니다.
-        if(new_id.equals("")){
-            new_id += "a";
-        }
-
-        //6단계 new_id의 길이가 16자 이상이면, new_id의 첫 15개의 문자를 제외한 나머지 문자들을 모두 제거합니다.
-        //     만약 제거 후 마침표(.)가 new_id의 끝에 위치한다면 끝에 위치한 마침표(.) 문자를 제거합니다.
-        if(new_id.length() >= 16){
-            new_id = new_id.substring(0, 15);
-            new_id = new_id.replaceAll("^[.]|[.]$","");
-        }
-
-        //7단계 new_id의 길이가 2자 이하라면, new_id의 마지막 문자를 new_id의 길이가 3이 될 때까지 반복해서 끝에 붙입니다.
-        if(new_id.length() <= 2){
-            while (new_id.length() < 3){
-                new_id += new_id.charAt(new_id.length()-1);
+                // 비어있지 않다면 뽑기 진행
+                if(nowNum !=0){
+                    // 이전에 뽑은 인형과
+                    // 1. 같다면 이전배열 삭제 및 리스트 추가 X, cnt+=2
+                    if(!integers.isEmpty() && integers.get(integers.size()-1).equals(nowNum)){
+                        integers.remove(integers.size()-1);
+                        cnt +=2;
+                        // 2. 다르다면 배열 추가
+                    }else{
+                        integers.add(nowNum);
+                    }
+                    // 뽑은 인형의 빈자리는 0으로 변경
+                    board[j][move] = 0;
+                    break;
+                }
             }
         }
-        return new_id;
+        return cnt;
     }
 }
