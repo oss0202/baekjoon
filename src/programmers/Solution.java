@@ -1,58 +1,28 @@
 package programmers;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.Arrays;
 
 public class Solution {
     public static void main(String[] args) {
-//        String[] participant = {"leo", "kiki", "eden"};
-//        String[] completion = {"eden", "kiki"};
-
-        String[] participant = {"mislav", "stanko", "mislav", "ana"};
-        String[] completion = {"stanko", "ana", "mislav"};
-
-        String result = "";
-
-        Map<String, Integer> map = new HashMap<>();
-        for (String player : participant) {
-            map.put(player, map.getOrDefault(player, 0) + 1);
-        }
-        for (String player : completion) {
-            map.put(player, map.get(player) - 1);
-        }
-
-        Iterator<Map.Entry<String, Integer>> iterator = map.entrySet().iterator();
-        while (iterator.hasNext()){
-            Map.Entry<String, Integer> entry = iterator.next();
-            if(entry.getValue() != 0){
-                result = entry.getKey();
-            }
-        }
-        System.out.println(result);
+        int[] array = {1, 5, 2, 6, 3, 7, 4};
+        int[][] commands = {{2,5,3},{4,4,1},{1,7,3}};
+        int[] result = solution(array, commands);
+        System.out.println(Arrays.toString(result));
     }
 
-    public static String solution(String[] participant, String[] completion) {
-        String result = "";
+    public static int[] solution(int[] array, int[][] commands) {
+        int[] answer = new int[commands.length];
+        int index = 0;
+        for (int i = 0; i < commands.length; i++) {
+            int[] command = commands[i];
+            // 1.배열 자르기 시작 인덱스(n-1), 앞에서 자를 인덱스(n)
+            int[] result = Arrays.copyOfRange(array, command[0]-1,command[1]);
 
-        Map<String, Integer> map = new HashMap<>();
-        // 참가자 인원 수(동명이인 포함)
-        for (String player : participant) {
-            map.put(player, map.getOrDefault(player, 0) + 1);
+            // 2. 정렬
+            Arrays.sort(result);
+            // 3. 숫자추출 (n-1)
+            answer[index++] = result[command[2]-1];
         }
-        // 완주자 제거
-        for (String player : completion) {
-            map.put(player, map.get(player) - 1);
-        }
-
-        // 미완주자 추출
-        Iterator<Map.Entry<String, Integer>> iterator = map.entrySet().iterator();
-        while (iterator.hasNext()){
-            Map.Entry<String, Integer> entry = iterator.next();
-            if(entry.getValue() != 0){
-                result = entry.getKey();
-            }
-        }
-        return result;
+        return answer;
     }
 }
