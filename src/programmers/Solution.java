@@ -3,26 +3,49 @@ package programmers;
 import java.util.Arrays;
 
 public class Solution {
+    static int[] p1 = {1,2,3,4,5};
+    static int[] p2 = {2,1,2,3,2,4,2,5};
+    static int[] p3 = {3,3,1,1,2,2,4,4,5,5};
+
     public static void main(String[] args) {
-        int[] array = {1, 5, 2, 6, 3, 7, 4};
-        int[][] commands = {{2,5,3},{4,4,1},{1,7,3}};
-        int[] result = solution(array, commands);
+        int[] answers = {1,3,2,4,2};
+        int[] result = solution(answers);
         System.out.println(Arrays.toString(result));
     }
 
-    public static int[] solution(int[] array, int[][] commands) {
-        int[] answer = new int[commands.length];
-        int index = 0;
-        for (int i = 0; i < commands.length; i++) {
-            int[] command = commands[i];
-            // 1.배열 자르기 시작 인덱스(n-1), 앞에서 자를 인덱스(n)
-            int[] result = Arrays.copyOfRange(array, command[0]-1,command[1]);
+    public static int[] solution(int[] answers) {
+        int[] score = new int[3];
 
-            // 2. 정렬
-            Arrays.sort(result);
-            // 3. 숫자추출 (n-1)
-            answer[index++] = result[command[2]-1];
+        // 사람 별로 점수 계산
+        for (int i = 0; i < answers.length; i++) {
+            if(answers[i] == p1[i%5]) score[0]++;
+            if(answers[i] == p2[i%8]) score[1]++;
+            if(answers[i] == p3[i%10]) score[2]++;
         }
-        return answer;
+        // 가장 높은 점수 구하기
+        int max = 0;
+        for (int i = 0; i < 3; i++) {
+            if(score[i] > max){
+                max = score[i];
+            }
+        }
+
+        // 높은 점수 카운트
+        int maxCnt = 0;
+        for (int i = 0; i < 3; i++) {
+            if(max == score[i]){
+                maxCnt++;
+            }
+        }
+
+        int[] result = new int[maxCnt];
+        int index = 0;
+        // 최고 높은 점수를 받은 사람 배열 생성
+        for (int i = 0; i < 3; i++) {
+            if(max == score[i]){
+                result[index++] = i + 1;
+            }
+        }
+        return result;
     }
 }
