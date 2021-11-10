@@ -1,63 +1,65 @@
 package programmers;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class Solution {
     public static void main(String[] args) {
-        int n = 5;
-        int[] lost = {2,4};
-        int[] reserve = {1,3,5};
-        System.out.println(solution(n, lost, reserve));
+//        int N = 5;
+//        int[] stages = {2, 1, 2, 6, 2, 4, 3, 3};
+        int N = 4;
+        int[] stages = {4,4,4,4,4};
+        int[] result = solution(N, stages);
+        System.out.println(Arrays.toString(result));
 
     }
-
-    public static int solution(int n, int[] lost, int[] reserve) {
-        /*
-        1. 전체 학생 수와 동일한 int 배열을 만든다.
-        2. 0 / 1 / -1 로 체육복 상태를 나타낸다.
-        0 : 기본 상태(체육복이 있고, 도난 당하지 않은 상태)
-        1 : 여부의 체육복이 있는 상태
-        -1 : 체육복을 도난 당한 상태
-        전체 학생 배열 all에서 lost에 해당하는 학생의 인덱스는 -1 처리 reserve에 해당하는 학생은 +1로 처리한다.
-        3. 상태를 다 나타낸 후에 0번부터 체육복 여부를 확인하고 체육복이 없다면 앞 번호나 뒷 번호에게 체육복을 빌리는 처리를 한다.
-        단, 1번은 앞 번호가 존재하지 않으므로 뒷 번호에게만 빌릴 수 있고, 마지막 번호는 앞 번호만 빌릴 수 있다.
-         */
-        Arrays.sort(lost);
-        Arrays.sort(reserve);
-        // 1. 전체 학생 배열 생성
-        int[] users = new int[n];
-
-        // 2. 전체 학생 기본세팅
-        // 1) 여분 있는 학생
-        for (int i : reserve) {
-            users[i-1]++;
+    public static int[] solution(int N, int[] stages) {
+        // 각 스테이지별 인원 수 구하기(N+1은 마지막 스테이지 클리어한 사람)
+        int[] stagePerson = new int[N];
+        for (int i = 0; i < stages.length; i++) {
+            if(stages[i] != N+1){
+                stagePerson[stages[i]-1]++;
+            }
         }
-        // 2) 잃어버린 학생
-        for (int i : lost) {
-            users[i-1]--;
-        }
+        // 실패율 list 생성
+        List<Double> failRate = new ArrayList<>();
+        // 인덱스계산을 위한 실패율 array 생성
+        double[] failArray = new double[N];
 
-        //3. 상태 확인 후 빌리는 처리
-        for (int i = 0; i < users.length; i++) {
-            if(users[i]<0){
-                //첫번째가 아니면 앞에서 빌릴 수 있다.
-                if(i!=0 && users[i-1]>0){
-                    users[i]++;
-                    users[i-1]--;
-                    //마지막이 아니면 뒤에서 빌릴 수 있다.
-                }else if(i!=users.length-1 && users[i+1]>0){
-                    users[i]++;
-                    users[i+1]--;
+        // 스테이지에 도달한 명 수
+        double num = stages.length;
+        // 다음 스테이지 인원 수
+        double remain = 0;
+
+        //failArray 배열 실패율
+        for (int i = 0; i < stagePerson.length; i++) {
+            remain = stagePerson[i];
+            if(num == 0){
+                failArray[i] = 0;
+            }else{
+                failArray[i] = stagePerson[i]/num;
+                num = num - remain;
+            }
+            failRate.add(failArray[i]);
+        }
+        //내림차순 정렬
+        Collections.sort(failRate, Collections.reverseOrder());
+
+        //정렬된 실패율값과 stage값을 비교해서 같으면 인덱스 번호를 가져온다.
+        int[] result = new int[N];
+
+        //중복된 값이 있을 수 있으므로 꺼낸 인덱스의 값은 -1로 변환해준다.
+        for (int i = 0; i < failRate.size(); i++) {
+            for (int j = 0; j < failArray.length; j++) {
+                if(failRate.get(i) == failArray[j]){
+                    result[i] = j+1;
+                    failArray[j] = -1;
+                    break;
                 }
             }
         }
-
-        int maxUserCnt = 0;
-        for (int i = 0; i < users.length; i++) {
-            if(users[i]>=0){
-                maxUserCnt++;
-            }
-        }
-        return maxUserCnt;
+        return result;
     }
 }
