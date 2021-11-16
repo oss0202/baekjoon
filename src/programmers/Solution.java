@@ -1,39 +1,36 @@
 package programmers;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.TextStyle;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
+import java.util.Arrays;
 
 public class Solution {
     public static void main(String[] args) {
-
-        int month = 5;
-        int day = 24;
-
-        String answer = "";
-        Calendar cal = Calendar.getInstance();
-        cal.set(2016, month-1, day);
-        Date date = cal.getTime();
-        SimpleDateFormat sdf = new SimpleDateFormat("E", Locale.ENGLISH);
-
-        answer = sdf.format(date).toUpperCase();
-
-
-        Calendar cal2 = new Calendar.Builder().setCalendarType("iso8601").setDate(2016, month - 1, day).build();
-        System.out.println(cal2.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, new Locale("ko-KR")).toUpperCase());
-
-        LocalDate localDate = LocalDate.of(2016,month,day);
-        System.out.println(localDate.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.ENGLISH).toUpperCase());
-        System.out.println(localDate.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH));
-        System.out.println(localDate.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.KOREAN));
+        int n = 5;
+        int[] arr1 = {9, 20, 28, 18, 11};
+        int[] arr2 = {30, 1, 21, 17, 28};
+        String[] result = solution(n, arr1, arr2);
+        System.out.println(Arrays.toString(result));
     }
+    public static String[] solution(int n, int[] arr1, int[] arr2) {
+        int[] map = new int[n];
+        String[] result = new String[n];
 
-    public String solution(int a, int b) {
-        LocalDate localDate = LocalDate.of(2016,a,b);
-        String answer = localDate.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.ENGLISH).toUpperCase();
-        return answer;
+        // 1. 지도1(arr1), 지도2(arr2) or 연산
+        for (int i = 0; i < map.length; i++) {
+            map[i] = arr1[i]|arr2[i];
+        }
+
+        // 2. 자리수가 꽉 차지 않는다면 앞에 0 붙여주기
+        for (int i = 0; i < map.length; i++) {
+            String binaryResult = Integer.toBinaryString(map[i]);
+            int cha = n - binaryResult.length();
+            for (int j = 0; j < cha; j++) {
+                binaryResult = "0" + binaryResult;
+            }
+            // 3. 1은 #으로, 0은 공백으로 치환
+            binaryResult = binaryResult.replaceAll("1","#");
+            binaryResult = binaryResult.replaceAll("0"," ");
+            result[i] = binaryResult;
+        }
+        return result;
     }
 }
