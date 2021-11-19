@@ -4,14 +4,23 @@ import java.util.Arrays;
 
 public class Solution {
     public static void main(String[] args) {
-        int[][] result = {{60,50},{30,70},{60,30},{80,40}};
+        int[][] sizes = {{60,50},{30,70},{60,30},{80,40}};
 
-        int maxVal = 0;
-        int minVal = 0;
-        for (int i = 0; i < result.length; i++) {
+        /**
+         * 명합지갑 만들기
+         *
+         * 1. 가로 길이가 세로 길이보다 길도록 배열 값 변경
+         * 2. 가로, 세로 max값 구하기
+         */
+
+        int temp = 0;
+        for (int i = 0; i < sizes.length; i++) {
+            for (int j = 0; j < sizes.length; j++) {
+                if(sizes[i][0] < sizes[i][1]){
+
+                }
+            }
         }
-        System.out.println(maxVal);
-        System.out.println(minVal);
     }
     public int solution(int[][] sizes) {
         int answer = 0;
