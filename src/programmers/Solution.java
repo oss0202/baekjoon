@@ -1,33 +1,35 @@
 package programmers;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.Collections;
+import java.util.PriorityQueue;
 
 public class Solution {
     public static void main(String[] args) {
-        int[] arr = {5, 9, 7, 10};
-        int divisor = 5;
-        System.out.println(Arrays.toString(solution(arr, divisor)));
-    }
-    public static int[] solution(int[] arr, int divisor) {
-        List<Integer> result = new ArrayList();
-        for (int i = 0; i < arr.length; i++) {
-            if(arr[i]%divisor == 0){
-                result.add(arr[i]);
-            }
-        }
-        if(result.isEmpty()){
-            result.add(-1);
+        int[] priorities = {2, 1, 3, 2};
+        int location = 2;
+
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(Collections.reverseOrder());
+        int answer = 0;
+
+        for (int i = 0; i < priorities.length; i++) {
+            priorityQueue.add(priorities[i]);
         }
 
-        result.sort(Comparator.naturalOrder());
-        int[] finalResult = new int[result.size()];
-        for (int i = 0; i < result.size(); i++) {
-            finalResult[i] = result.get(i);
+        while (!priorityQueue.isEmpty()){
+            for (int i = 0; i < priorities.length; i++) {
+                if(priorities[i] == priorityQueue.peek()){
+                    if(i == location){
+                        answer++;
+                    }
+                    priorityQueue.poll();
+                    answer++;
+                }
+            }
         }
-//        int[] result = Arrays.stream(arr).filter(value -> value%divisor ==0).sorted().toArray();
-        return finalResult;
+        if(priorityQueue.isEmpty()){
+            answer = -1;
+        }
+
+        System.out.println(priorityQueue);
     }
 }
