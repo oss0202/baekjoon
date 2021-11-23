@@ -1,48 +1,25 @@
 package programmers;
 
-import java.util.Collections;
-import java.util.PriorityQueue;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Solution {
     public static void main(String[] args) {
-        int[] priorities = {2, 1, 3, 2};
-        int location = 2;
-
-        int result = solution(priorities, location);
-        System.out.println(result);
+        String[] phone_book = {"119", "97674223", "1195524421"};
     }
 
-    public static int solution(int[] priorities, int location) {
-        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(Collections.reverseOrder());
-        int answer = 0;
-
-        /*** PriorityQueue(내림차순정렬) */
-        for (int i = 0; i < priorities.length; i++) {
-            priorityQueue.add(priorities[i]);
-        }
-
-        /**
-         * PriorityQueue(내림차순정렬)를 순회하면서
-         * 인쇄문서(priorities)와 비교하여 index 카운트
-         * */
-        out:
-        while (!priorityQueue.isEmpty()){
-            for (int i = 0; i < priorities.length; i++) {
-                /*** PriorityQueue와 같다면 카운트증가*/
-                if(priorities[i] == priorityQueue.peek()){
-                    /*** 마지막 for문일 경우 그대로 return */
-                    if(i == location){
-                        answer++;
-                        break out;
-                    }
-                    priorityQueue.poll();
-                    answer++;
-                }
-            }
-        }
-        if(priorityQueue.isEmpty()){
-            answer = -1;
-        }
-        return answer;
+    public boolean solution(String[] phone_book) {
+        // 1. HashMap을 선언한다.
+        Map<String, Integer> map = new HashMap<>();
+        // 2. 모든 전화번호를 HashMap에 넣는다.
+        for (int i = 0; i < phone_book.length; i++)
+            map.put(phone_book[i], i);
+        // 3. 모든 전화번호의 substring이 HashMap에 존재하는지 확인한다.
+        for (int i = 0; i < phone_book.length; i++)
+            for (int j = 0; j < phone_book[i].length(); j++)
+                if (map.containsKey(phone_book[i].substring(0, j)))
+                    return false;
+        return true;
     }
+
 }
