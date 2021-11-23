@@ -1,6 +1,5 @@
 package programmers;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.PriorityQueue;
 
@@ -9,41 +8,41 @@ public class Solution {
         int[] priorities = {2, 1, 3, 2};
         int location = 2;
 
+        int result = solution(priorities, location);
+        System.out.println(result);
+    }
+
+    public static int solution(int[] priorities, int location) {
         PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(Collections.reverseOrder());
         int answer = 0;
 
+        /*** PriorityQueue(내림차순정렬) */
         for (int i = 0; i < priorities.length; i++) {
             priorityQueue.add(priorities[i]);
         }
 
-//        while (!priorityQueue.isEmpty()){
-//            for (int i = 0; i < priorities.length; i++) {
-//                if(priorities[i] == priorityQueue.peek()){
-//                    if(i == location){
-//                        answer++;
-//                    }
-//                    priorityQueue.poll();
-//                    answer++;
-//                }
-//            }
-//        }
-//        if(priorityQueue.isEmpty()){
-//            answer = -1;
-//        }
-
-//        System.out.println(priorityQueue);
-        String[] strings = {"가", "나", "라", "다", "하", "아"};
-        PriorityQueue<String> stringPriorityQueue = new PriorityQueue<>();
-        Arrays.stream(strings).forEach(stringPriorityQueue::add);
-        System.out.println(stringPriorityQueue);
-
-        stringPriorityQueue = new PriorityQueue<>();
-        for (int i = 0; i < strings.length; i++) {
-            stringPriorityQueue.add(strings[i]);
+        /**
+         * PriorityQueue(내림차순정렬)를 순회하면서
+         * 인쇄문서(priorities)와 비교하여 index 카운트
+         * */
+        out:
+        while (!priorityQueue.isEmpty()){
+            for (int i = 0; i < priorities.length; i++) {
+                /*** PriorityQueue와 같다면 카운트증가*/
+                if(priorities[i] == priorityQueue.peek()){
+                    /*** 마지막 for문일 경우 그대로 return */
+                    if(i == location){
+                        answer++;
+                        break out;
+                    }
+                    priorityQueue.poll();
+                    answer++;
+                }
+            }
         }
-        System.out.println(stringPriorityQueue);
-
-        Arrays.sort(strings);
-        System.out.println(Arrays.toString(strings));
+        if(priorityQueue.isEmpty()){
+            answer = -1;
+        }
+        return answer;
     }
 }
