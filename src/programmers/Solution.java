@@ -1,5 +1,6 @@
 package programmers;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.PriorityQueue;
 
@@ -15,21 +16,34 @@ public class Solution {
             priorityQueue.add(priorities[i]);
         }
 
-        while (!priorityQueue.isEmpty()){
-            for (int i = 0; i < priorities.length; i++) {
-                if(priorities[i] == priorityQueue.peek()){
-                    if(i == location){
-                        answer++;
-                    }
-                    priorityQueue.poll();
-                    answer++;
-                }
-            }
-        }
-        if(priorityQueue.isEmpty()){
-            answer = -1;
-        }
+//        while (!priorityQueue.isEmpty()){
+//            for (int i = 0; i < priorities.length; i++) {
+//                if(priorities[i] == priorityQueue.peek()){
+//                    if(i == location){
+//                        answer++;
+//                    }
+//                    priorityQueue.poll();
+//                    answer++;
+//                }
+//            }
+//        }
+//        if(priorityQueue.isEmpty()){
+//            answer = -1;
+//        }
 
-        System.out.println(priorityQueue);
+//        System.out.println(priorityQueue);
+        String[] strings = {"가", "나", "라", "다", "하", "아"};
+        PriorityQueue<String> stringPriorityQueue = new PriorityQueue<>();
+        Arrays.stream(strings).forEach(stringPriorityQueue::add);
+        System.out.println(stringPriorityQueue);
+
+        stringPriorityQueue = new PriorityQueue<>();
+        for (int i = 0; i < strings.length; i++) {
+            stringPriorityQueue.add(strings[i]);
+        }
+        System.out.println(stringPriorityQueue);
+
+        Arrays.sort(strings);
+        System.out.println(Arrays.toString(strings));
     }
 }
