@@ -6,6 +6,11 @@ import java.util.Map;
 public class Solution {
     public static void main(String[] args) {
         String[] phone_book = {"119", "97674223", "1195524421"};
+
+        String str = "abcdefg";
+        System.out.println(str.startsWith("abc"));
+        System.out.println(str.startsWith("abd"));
+        System.out.println(str.startsWith("bcd"));
     }
 
     public boolean solution(String[] phone_book) {
