@@ -1,57 +1,35 @@
 package programmers;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class Solution {
-    Set<Integer> numberSet = new HashSet<>();
-    public void recursive(String comb, String others){
-        // 1. 현재 조합(comb)을 set에 추가한다.
-        if(!comb.equals("")){
-            numberSet.add(Integer.valueOf(comb));
+    public String solution(int[] numbers){
+        String answer = "";
+        //문자열 리턴을 해줄 스트링배열 생성
+        String[] str = new String[numbers.length];
+
+        //int배열 String배열로 변환
+        for(int i = 0; i < numbers.length; i++){
+            str[i] = String.valueOf(numbers[i]);
         }
 
-        // 2. 남은 숫자 중 한개를 더 해 새로운 조합을 만든다.
-        for(int i = 0; i < others.length(); i++){
-            // i번째를 제외하고 나머지 숫자를 다 전달한다.
-            recursive(comb + others.charAt(i),
-                    others.substring(0,i) + others.substring(i + 1));
-        }
-    }
-
-    public int solution(String numbers){
-        int count  = 0;
-        // 1. 모든 숫자조합을 모두 만들어 준다.(재귀함수)
-        recursive("", numbers);
-
-        System.out.println(numberSet);
-        // 2. 소수의 개수를 센다
-        Iterator<Integer> it = numberSet.iterator();
-        while (it.hasNext()){
-            int number = it.next();
-            if(isPrime(number)){
-                count++;
+        //내림차순 정렬
+        Arrays.sort(str, new Comparator<String>() {
+            @Override
+            public int compare(String a, String b) {
+                return (b+a).compareTo(a+b);
+                //오름차순 정렬 (o1+o2).compareTo(o1+o2);
             }
-        }
-        // 3. 소수의 개수를 반환한다.
-        return count;
-    }
+        });
 
-    public boolean isPrime(int num) {
-        // 1. 0과 1은 소수가 아니다.
-        if(num == 0 || num == 1)
-            return false;
+        //0값이 중복일경우 ex){0,0,0}
+        //답이 000이 나오면 안되므로 첫번째값이 0이면 0을 리턴
+        if (str[0].equals("0")) return "0";
 
-        // 2. 에라토스테네스의 체의 limit을 계산한다.
-        int lim = (int)Math.sqrt(num);
+        //0이 아니면 문자열을 더해준다.
+        for(String s: str) answer += s;
 
-        // 3. 에라토스테네스의 체에 따라 limit까지만 배수 여부를 확인한다.
-        for(int i = 2; i <= lim; i++){
-            if(num % i == 0){
-                return false;
-            }
-        }
-        return true;
+        return answer;
     }
 }
