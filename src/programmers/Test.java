@@ -1,31 +1,37 @@
 package programmers;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class Test {
     public static void main(String[] args) {
-        String str = "abcdefg";
-//        System.out.println(str.substring(1,3));
+        String[] strings = {"B", "AA", "BB", "A"};
+        Arrays.sort(strings, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o1.compareTo(o2);
+            }
+        });
+//        System.out.println(Arrays.toString(strings));
+        System.out.println("12".compareTo("21"));
+        System.out.println("21".compareTo("12"));
+        System.out.println("-------------------");
 
-        for (int i = 0; i < str.length(); i++) {
-            System.out.println(str.substring(0,i) + " " + str.substring(i+1));
-        }
-//        int result = Integer.parseInt(null);
-        Integer result2 = null;
+        String[] stringInts = { "2","3","1"};
+        Arrays.sort(stringInts, new Comparator<String>(){
 
-//        System.out.println(str.substring(0,3));
-    }
+            @Override
+            public int compare(String o1, String o2) {
+                System.out.println("o1 : " + o1);
+                System.out.println("o2 : " + o2);
+//                System.out.println("o1+o2 : " + (o1+o2));
+//                System.out.println("o2+o1 : " + (o2+o1));
+                int result = (o1+o2).compareTo(o2+o1);
+                System.out.println(result);
+                return result;
+            }
+        });
 
-    public int solution(int[] A) {
-        Set<Integer> integerSet = new HashSet<>();
-        for (int i = 0; i < A.length; i++) {
-            integerSet.add(A[i]);
-        }
-
-
-
-        return 0;
+        System.out.println(Arrays.toString(stringInts));
     }
 }
