@@ -1,12 +1,15 @@
 package programmers;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 public class Solution {
     public static void main(String[] args) {
         int[] numbers = {6,10,2};
+        System.out.println(solution(numbers));
 
+
+    }
+    public static String solution(int[] numbers) {
         // 문자열 스프림 배열 생성
         String[] strings = new String[numbers.length];
 
@@ -17,11 +20,15 @@ public class Solution {
 
         // 내림차순 정렬
         Arrays.sort(strings, (a, b) -> {
-            return (a+b).compareTo(b+a);
+            return (b+a).compareTo(a+b);
             //오름차순 정렬
         });
+        String result = "";
+        for (int i = 0; i < strings.length; i++) {
+            result += strings[i];
+        }
+        if(strings[0].equals("0")) result = "0";
 
-        System.out.println(Arrays.toString(strings));
-
+        return result;
     }
 }
