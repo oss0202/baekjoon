@@ -2,9 +2,10 @@ package programmers;
 
 public class Solution {
     public static void main(String[] args) {
-
+        String s = "aabbaccc";
+        System.out.println(solution(s));
     }
-    public int solution(String s) {
+    public static int solution(String s) {
         // 1. 최소 문자열을 찾기 위한 비교 변수.
         int answer =Integer.MAX_VALUE;
 
@@ -22,8 +23,10 @@ public class Solution {
 
             // substring()의 범위만큼 반복.
             for(int j =0;j<s.length()/i;j++){
+                int startIndex = j * i;
+                int endIndex = (j * i) + i;
                 // 4. 이전에 자른 문자열과 현재 자른 문자열이 같다면 카운팅.
-                if(temp.equals(s.substring(j*i,(j*i)+i))){
+                if(temp.equals(s.substring(startIndex, endIndex))){
                     count++;
                     continue;
                 }
@@ -37,7 +40,7 @@ public class Solution {
                 }
 
                 // 7. 현재 자른 문자열로 비교대상 변경.
-                temp=s.substring(j*i,(j*i)+i);
+                temp=s.substring(startIndex, endIndex);
             }
 
             // 8. 마지막에 붙이지 못한 문자열을 붙인다.
