@@ -6,15 +6,21 @@ public class IncrementThread {
     public static void main(String[] args) throws InterruptedException {
         Thread backgroundThread = new Thread(()->{
             for (int i = 0; i < 10000000; i++) {
-                ++count;
+//                ++count;
+                increment();
             }
         });
         backgroundThread.start();
 
         for (int i = 0; i < 10000000; i++) {
-            ++count;
+//            ++count;
+            increment();
         }
         TimeUnit.SECONDS.sleep(5);
         System.out.println(count);
+    }
+
+    private static synchronized void increment(){
+        ++count;
     }
 }
