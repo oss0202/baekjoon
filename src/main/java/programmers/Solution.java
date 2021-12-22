@@ -1,28 +1,28 @@
 package programmers;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Solution {
-    public int solution(int left, int right) {
-        //약수의 갯수
-        int measure = 0;
-        //최종 리턴값
-        int reuslt = 0;
-        for (int i = left; i <= right; i++) {
-            measure = 0;
-            for (int j = 1; j <= i; j++) {
-                if(i%j == 0){
-                    measure++;
+    public int[] solution(int []arr) {
+        List<Integer> result = new ArrayList();
+        //배열 for문
+        for (int i = 0; i < arr.length; i++) {
+            //첫번째는 무조건 추가
+            if(i==0){
+                result.add(arr[i]);
+
+                //이전 배열과 다르면 추가, 같으면 생략
+            }else{
+                if(arr[i] != arr[i-1]){
+                    result.add(arr[i]);
                 }
             }
-            //짝수 : 더하기
-            //홀수 : 빼기
-            if(measure%2 == 0){
-                reuslt+=i;
-            }else{
-                reuslt-=i;
-            }
         }
-        return reuslt;
+        int[] answer = new int[result.size()];
+        for (int i = 0; i < answer.length; i++) {
+            answer[i] = result.get(i);
+        }
+        return answer;
     }
 }
