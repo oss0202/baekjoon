@@ -10,7 +10,8 @@ public class UseRuntimeException {
         try {
             throw new SQLException();
         }catch (SQLException e){
-            throw new OssException(e);
+            throw new OssException("Error 500");
+//            throw new OssException(e);
         }
     }
 }
