@@ -1,4 +1,4 @@
-package exception;
+package old.exception;
 
 import java.sql.SQLException;
 

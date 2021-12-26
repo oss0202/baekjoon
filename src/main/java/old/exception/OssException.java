@@ -1,4 +1,4 @@
-package exception;
+package old.exception;
 
 public class OssException extends RuntimeException {
     public OssException(Throwable cause) {
