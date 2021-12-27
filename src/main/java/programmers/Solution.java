@@ -1,20 +1,42 @@
 package programmers;
 
+
 import java.util.Arrays;
 
 public class Solution {
     public static void main(String[] args) {
-        int[] arr = {4,3,2,1};
-        System.out.println(Arrays.toString(solution(arr)));
+//        long result = 1234L;
+//        System.out.println(result + "");
+//
+//        String resultStr = result + "";
+//        for (int i = 0; i < resultStr.length(); i++) {
+//            System.out.println(resultStr.charAt(i));
+//        }
+//
+//        System.out.println("----------------");
+//
+//        int resultInt = (int) result;
+//        while (resultInt > 0){
+//            System.out.println(resultInt%10);
+//            resultInt /= 10;
+//        }
+        System.out.println(Arrays.toString(solution(12345)));
+
     }
-    public static int[] solution(int[] arr) {
+    public static int[] solution(long n) {
         /**
-         * 1. 배열의 길이가 1이면 -1 리턴
-         * 2. 배열 돌면서 제일 작은 수 찾기
-         * 3. 제일 작은 수 제외하고 배열 새로 만들기
+         * 1. 뒤에서부터 하나씩 빼오기
+         * 2. while문 돌면서 변경된 사항 넣어주기
          */
-        if(arr.length <= 1) return new int[]{-1};
-        int min = Arrays.stream(arr).min().getAsInt();
-        return Arrays.stream(arr).filter(value -> value != min).toArray();
+        int resultInt = (int) n;
+        int[] result = new int[(n+"").length()];
+        int i = 0;
+        while (resultInt > 0){
+            result[i++] = resultInt%10;
+            resultInt /= 10;
+        }
+        return result;
+
+
     }
 }
