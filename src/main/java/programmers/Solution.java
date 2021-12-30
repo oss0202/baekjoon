@@ -1,40 +1,32 @@
 package programmers;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class Solution {
     public static void main(String[] args) {
 
-        int[] d = {1,3,2,5,4};
-        int budget = 9;
+        int n = 45;
+        int jin = 3;
 
-        System.out.println(solution(d,budget));
-    }
-    public static int solution(int[] d, int budget) {
-        /**
-         * 최대 몇개의 부서에 예산이 지원 가능한지 확인
-         * 1. 오름차순으로 부서별 예산 정렬
-         * 2. 부서별 예산 리스트 for문
-         *  1) 남은 예산 - 부서예산이 0보다 클 경우
-         *  - 예산 지급
-         *  - 지급 숫자 count
-         *  2) 나머지
-         *  - 더이상 예산을 지급하지 못하므로 종료처리
-         */
-        int restBudget = 0;
-        int budgetCnt = 0;
+        int mok = 0;
+        int rest = 0;
 
-        Arrays.sort(d);
-        for (int i = 0; i < d.length; i++) {
-            restBudget = budget - d[i];
-            if(restBudget >= 0){
-                budget = restBudget;
-                budgetCnt++;
-            }else{
-                break;
-            }
+        List<Integer> intLnt = new ArrayList<>();
+
+        while (n > 0){
+            mok = n/jin;
+            rest = n%jin;
+            n =mok;
+            intLnt.add(rest);
         }
-        return budgetCnt;
+        int result = 0;
+        for (int i = 0; i < intLnt.size(); i++) {
+            result += intLnt.get(i) * Math.pow(3, intLnt.size() - i - 1);
+        }
+        System.out.println(result);
     }
 }
