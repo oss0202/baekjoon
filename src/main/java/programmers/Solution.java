@@ -1,32 +1,27 @@
 package programmers;
 
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 public class Solution {
     public static void main(String[] args) {
+        /**
+         * 1. 배열 자르기
+         * 2. 배열 정렬하기
+         * 3. n번째 숫자 뽑아내기
+         */
+        int[] array = {1, 5, 2, 6, 3, 7, 4};
+        int[][] commands = {{2,5,3},{4,4,1},{1,7,3}};
 
-        int n = 45;
-        int jin = 3;
+        int[] answer = new int[commands.length];
+        int index = 0;
+        for (int i = 0; i < commands.length; i++) {
+            int[] command = commands[i];
+            int[] result = Arrays.copyOfRange(array, command[0]-1, command[1]);
 
-        int mok = 0;
-        int rest = 0;
-
-        List<Integer> intLnt = new ArrayList<>();
-
-        while (n > 0){
-            mok = n/jin;
-            rest = n%jin;
-            n =mok;
-            intLnt.add(rest);
+            Arrays.sort(result);
+            answer[index++] = result[command[2]-1];
         }
-        int result = 0;
-        for (int i = 0; i < intLnt.size(); i++) {
-            result += intLnt.get(i) * Math.pow(3, intLnt.size() - i - 1);
-        }
-        System.out.println(result);
+        System.out.println(Arrays.toString(answer));
     }
 }
