@@ -1,22 +1,16 @@
 package programmers;
 
-import java.util.Arrays;
-
 public class Test {
     public static void main(String[] args) {
-        String[] strings = {"12","123","6","678","9"};
-        Arrays.sort(strings);
-        System.out.println(Arrays.toString(strings));
-
-        boolean resultBl = true;
-
-        out:
-        for (int i = 0; i < strings.length-1; i++) {
-            if(strings[i+1].startsWith(strings[i])){
-                resultBl = false;
-                break out;
+        // 익명 클래스로 Runnable을 구현
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Start to new thread!");
             }
-        }
-        System.out.println(resultBl);
+        });
+        
+        // 람다 표현식으로 단순하게 표현
+        thread = new Thread(()-> System.out.println("Start to new thread!"));
     }
 }
