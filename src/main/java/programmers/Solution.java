@@ -1,33 +1,51 @@
 package programmers;
 
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.Arrays;
 
 public class Solution {
-    public int solution(String[][] clothes) {
+    public static void main(String[] args) {
         /**
-         * 1. 각 의상종류별 count하기
-         *  -  HashMap을 이용
-         *  - String(의상종류), Integer(숫자)
-         * 3. 조합의 수 계산하기
-         *  - HashMap에서 뒤에 숫자들 곱한 다음 -1
-         *  - 모두 안입을 경우 빼주기
-         *  - (n X n X n) -1
+         * 1. 배열 자르기
+         *  - Arrays.copyOfRange( 배열, 시작인덱스, 해당인덱스 앞에서 자름)
+         *  - Arrays.copyOfRange( 배열, command -1, command)
+         * 2. 배열 정렬하기
+         *  - Arrays.sort( 배열 )
+         * 3. 숫자 추출하기
+         *  - 배열[인덱스]
+         *  - 배열[command -1]
          */
-        int answer = 1;
-        Map<String, Integer> map = new HashMap<>();
-        for (int i = 0; i < clothes.length; i++) {
-            String[] clothe = clothes[i];
-            map.put(clothe[1], map.getOrDefault(clothe[1], 0) + 1);
-        }
-        Iterator<Map.Entry<String, Integer>> entryIterator = map.entrySet().iterator();
-        while (entryIterator.hasNext()){
-            Map.Entry<String, Integer> innerMap = entryIterator.next();
-            answer *= (innerMap.getValue() +1 );
-        }
+        int[] array = {1, 5, 2, 6, 3, 7, 4};
+        int[] command = {2,5,3};
 
-        return answer-1;
+        int[] result = Arrays.copyOfRange(array, 2-1,5);
+        Arrays.sort(result);
+        System.out.println(Arrays.toString(result));
+
+    }
+
+    public int[] solution(int[] array, int[][] commands){
+        int[] answer = new int[commands.length];
+        int index = 0;
+        for (int i = 0; i < commands.length; i++) {
+            int[] command = commands[i];
+            /**
+             * 1. 배열 자르기
+             *  - Arrays.copyOfRange( 배열, 시작인덱스, 해당인덱스 앞에서 자름)
+             *  - Arrays.copyOfRange( 배열, command -1, command)
+             */
+            int[] result = Arrays.copyOfRange(array, command[0]-1,command[1]);
+             /** 2. 배열 정렬하기
+             *  - Arrays.sort( 배열 )
+             */
+             Arrays.sort(result);
+
+             /** 3. 숫자 추출하기
+             *  - 배열[인덱스]
+             *  - 배열[command -1]
+             */
+             answer[index++] = result[command[2]-1];
+        }
+        return answer;
     }
 }
