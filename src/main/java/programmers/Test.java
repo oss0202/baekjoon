@@ -1,16 +1,25 @@
 package programmers;
 
+import java.util.*;
+
 public class Test {
     public static void main(String[] args) {
-        // 익명 클래스로 Runnable을 구현
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                System.out.println("Start to new thread!");
-            }
-        });
-        
-        // 람다 표현식으로 단순하게 표현
-        thread = new Thread(()-> System.out.println("Start to new thread!"));
+        long beforeTime = System.currentTimeMillis();
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < 200000; i++) {
+            map.put(i,i);
+        }
+        long afterTime = System.currentTimeMillis();
+        long secDiffTime = (afterTime - beforeTime);
+        System.out.println("list - "+secDiffTime);
+
+        beforeTime = System.currentTimeMillis();
+        List<Integer> integerList = new ArrayList<>();
+        for (int i = 0; i < 200000; i++) {
+            integerList.add(i);
+        }
+        afterTime = System.currentTimeMillis();
+        secDiffTime = (afterTime - beforeTime);
+        System.out.println("map - "+secDiffTime);
     }
 }
