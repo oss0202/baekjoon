@@ -1,44 +1,40 @@
 package programmers;
 
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Solution {
-    static int[] p1 = {1,2,3,4,5};
-    static int[] p2 = {2,1,2,3,2,4,2,5};
-    static int[] p3 = {3,3,1,1,2,2,4,4,5,5};
+    public static void main(String[] args) {
+        int[] numbers = {6, 10, 2};
+        Solution solution = new Solution();
+        System.out.println(solution.solution(numbers));
+    }
+    public String solution(int[] numbers) {
+        /**
+         * 1. int 배열을 integer 리스트로 변환
+         * 2. 두개씩 더했을 때 큰수가 되도록 내림차순 정렬
+         * 3. 정렬된 숫자 합치기
+         *  - 첫자리가 0이라면 0
+         */
+        List<Integer> integerList = Arrays.stream(numbers).boxed().collect(Collectors.toList());
 
-    public int[] solution(int[] answers) {
-        int[] score = new int[3];
+        Collections.sort(integerList, (a, b) -> {
+            String as = String.valueOf(a), bs = String.valueOf(b);
+            return -Integer.compare(Integer.parseInt(as + bs), Integer.parseInt(bs + as));
+        });
 
-        // 사람 별로 점수 계산
-        for (int i = 0; i < answers.length; i++) {
-            if(answers[i] == p1[i%5]) score[0]++;
-            if(answers[i] == p2[i%8]) score[1]++;
-            if(answers[i] == p3[i%10]) score[2]++;
-        }
-        // 가장 높은 점수 구하기
-        int max = 0;
-        for (int i = 0; i < 3; i++) {
-            if(score[i] > max){
-                max = score[i];
-            }
-        }
-
-        // 높은 점수 카운트
-        int maxCnt = 0;
-        for (int i = 0; i < 3; i++) {
-            if(max == score[i]){
-                maxCnt++;
-            }
+        StringBuilder sb = new StringBuilder();
+        for (Integer i : integerList) {
+            sb.append(i);
         }
 
-        int[] result = new int[maxCnt];
-        int index = 0;
-        // 최고 높은 점수를 받은 사람 배열 생성
-        for (int i = 0; i < 3; i++) {
-            if(max == score[i]){
-                result[index++] = i + 1;
-            }
+        String answer = sb.toString();
+        if(answer.charAt(0) == '0'){
+            answer = "0";
         }
-        return result;
+        return answer;
     }
 }
