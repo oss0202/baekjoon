@@ -1,63 +1,65 @@
 package programmers;
 
+import java.util.Arrays;
+
 public class Solution {
     public static void main(String[] args) {
+        /**
+         * 1. int 배열을 integer 리스트로 변환
+         * 2. 두개씩 더했을 때 큰수가 되도록 내림차순 정렬
+         * 3. 정렬된 숫자 합치기
+         *  - 첫자리가 0이라면 0
+         */
+//        int[] numbers = {6, 10, 2};
+        int[] numbers = {10, 6, 2};
+        System.out.println(Arrays.toString(numbers));
+        /**
+         * 2개씩 더했을 때 가장 큰 수가 되도록 내림차순 정렬
+         */
+        // int[] -> int stream -> integer stream -> string stream -> String[]
+        String[] strings = Arrays.stream(numbers).boxed().map(String::valueOf).toArray(String[]::new);
 
-    }
-    public int solution(String s) {
-        // 1. 최소 문자열을 찾기 위한 비교 변수.
-        int answer =Integer.MAX_VALUE;
+        // 첫번째와 두번째 비교
+        String str1 = strings[0] + strings[1];
+        String str2 = strings[1] + strings[0];
 
-        // 2. 문자열 길이가 1인 경우는 압축 불가로 1 반환. 안하면 테스트 케이스 1개에 걸린다.
-        if(s.length() == 1) return 1;
+        int int1 = Integer.parseInt(str1);
+        int int2 = Integer.parseInt(str2);
 
-        // 3. 1~s.length()/2 만큼 압축가능.
-        for(int i =1;i<=s.length()/2;i++){
-            // 압축 길이 별 문자열 변수.
-            String str = "";
-            // 자른 문자열을 비교 할 변수.
-            String temp="";
-            // 자른 문자열의 개수를 카운팅 할 변수.
-            int count = 1;
+        System.out.println("int1 = " + int1 + ", int2 = " + int2);
 
-            // substring()의 범위만큼 반복.
-            for(int j =0;j<s.length()/i;j++){
-                // 4. 이전에 자른 문자열과 현재 자른 문자열이 같다면 카운팅.
-                if(temp.equals(s.substring(j*i,(j*i)+i))){
-                    count++;
-                    continue;
-                }
-                // 5. 카운팅 > 1인 경우는 count+temp 후 count 초기화.
-                if(count >1){
-                    str+=count+temp;
-                    count = 1;
-                    // 6. 나머지의 경우는 자른 문자열인 temp만 붙여준다.
-                }else{
-                    str+=temp;
-                }
+        System.out.println(int1 > int2);
+        System.out.println(int1 < int2);
 
-                // 7. 현재 자른 문자열로 비교대상 변경.
-                temp=s.substring(j*i,(j*i)+i);
-            }
+        String temp = "";
+        // 둘중 큰 숫자인 것을 찾아서 순서 바꿔주기
+        // 뒤에꺼가 크다면 순서 바꾸기
+        // 앞에꺼가 크다면 기존 유지
+        if(int1 < int2){
+            temp = strings[0];
+            strings[0] = strings[1];
+            strings[1] = temp;
+        }
+        System.out.println(Arrays.toString(strings));
 
-            // 8. 마지막에 붙이지 못한 문자열을 붙인다.
-            if(count >1){
-                str+=count+temp;
-                count = 1;
-            }else{
-                str+=temp;
-            }
+        // 첫번째와 세번째 비교
+        str1 = strings[1] + strings[2];
+        str2 = strings[2] + strings[1];
+        int1 = Integer.parseInt(str1);
+        int2 = Integer.parseInt(str2);
 
-            // 9. s의 길이가 압축하는 길이로 나누어 떨어지지 않는 경우, 나머지 부분부터 마지막까지 substring을 이용해 붙인다.
-            if(s.length()%i !=0){
-                str+=s.substring(s.length()-s.length()%i,s.length());
-            }
-
-            // 10. 가장 짧은 길이를 찾음.
-            answer = answer > str.length() ? str.length() : answer;
+        if(int1 < int2){
+            temp = strings[1];
+            strings[1] = strings[2];
+            strings[2] = temp;
         }
 
 
-        return answer;
+
+    }
+    public int solution(int[] numbers) {
+
+
+        return 0;
     }
 }
