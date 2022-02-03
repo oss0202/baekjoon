@@ -1,27 +1,25 @@
 package programmers;
 
 
-import java.util.Arrays;
-
 public class Solution {
-    public static void main(String[] args) {
-        /**
-         * 1. 배열 자르기
-         * 2. 배열 정렬하기
-         * 3. n번째 숫자 뽑아내기
-         */
-        int[] array = {1, 5, 2, 6, 3, 7, 4};
-        int[][] commands = {{2,5,3},{4,4,1},{1,7,3}};
-
-        int[] answer = new int[commands.length];
-        int index = 0;
-        for (int i = 0; i < commands.length; i++) {
-            int[] command = commands[i];
-            int[] result = Arrays.copyOfRange(array, command[0]-1, command[1]);
-
-            Arrays.sort(result);
-            answer[index++] = result[command[2]-1];
+    public static int solution(int[] numbers, int target) {
+        int answer = 0;
+        answer = dfs(numbers, 0, 0, target);
+        return answer;
+    }
+    public static int dfs(int[] numbers, int n, int sum, int target) {
+        if(n == numbers.length) {
+            if(sum == target) {
+                return 1;
+            }
+            return 0;
         }
-        System.out.println(Arrays.toString(answer));
+        return dfs(numbers, n + 1, sum + numbers[n], target) + dfs(numbers, n + 1, sum - numbers[n], target);
+    }
+
+    public static void main(String[] args) {
+        int[] ints = {1,1,1,1,1};
+        int result = Solution.solution(ints, 3);
+        System.out.println(result);
     }
 }
